@@ -9,26 +9,29 @@ public class RadixSort {
         int[] arr1 = {123456, 654321, 111111};
         int[] arr2 = {9000, 1000, 99};
 
-        System.out.println(Arrays.toString(arr1));
         sort(arr1);
-        System.out.println(Arrays.toString(arr1));
-
-        System.out.println(Arrays.toString(arr2));
         sort(arr2);
+
+        System.out.println(Arrays.toString(arr1));
         System.out.println(Arrays.toString(arr2));
     }
 
     public static void sort(int[] arr) {
 
-        if (arr.length == 0) return;
+        if (arr.length == 0) {
+            return;
+        }
 
         int max = arr[0];
 
-        for (int val : arr) {
-            if (val < 0) return;
+        for (int i = 0; i < arr.length; i++) {
 
-            if (val > max) {
-                max = val;
+            if (arr[i] < 0) {
+                return;
+            }
+
+            if (arr[i] > max) {
+                max = arr[i];
             }
         }
 
@@ -41,8 +44,8 @@ public class RadixSort {
 
         int[] count = new int[10];
 
-        for (int val : arr) {
-            int digit = (val / place) % 10;
+        for (int i = 0; i < arr.length; i++) {
+            int digit = (arr[i] / place) % 10;
             count[digit]++;
         }
 
@@ -53,7 +56,9 @@ public class RadixSort {
         int[] result = new int[arr.length];
 
         for (int i = arr.length - 1; i >= 0; i--) {
+
             int digit = (arr[i] / place) % 10;
+
             count[digit]--;
             result[count[digit]] = arr[i];
         }
